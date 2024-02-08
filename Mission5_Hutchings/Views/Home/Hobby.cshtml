@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Hobby";
+}
+<div style="color:white;">
+<h4>Quote Calculator:</h4>
+    <br />
+<form>
+    <label for="rate">This is my rate:</label>
+    <br />
+        <input style="border-radius:10px;" id="rate" value="$10 / hr" readonly/>
+    <br /><br />
+    <label for="hours">Enter the number of hours you would like to meet for (Positive answers only):</label>
+    <br />
+        <input style="border-radius:10px;" id="hours" type="number" min="1" placeholder="Enter hours:" required onload="fixInput();" oninput="validateHours(this)" />
+        <span id="hoursError" style="color: red; display: none;">Please enter a positive number.</span>
+    <br /><br />
+        <input style="border-radius:10px;" type="submit" value="Submit" id="btnSubmit">
+</form>
+
+</div>
+
+<script>
+    // This function is used to validate the users input and make sure it is a positive number. 
+    function validateHours(input) {
+        var value = input.value;
+        var errorSpan = document.getElementById('hoursError');
+
+        // If statements that will display the error message and remove the submit button
+
+        if (value < 1) {
+            errorSpan.style.display = 'inline';
+            document.getElementById('btnSubmit').style.display = "none";
+        } else {
+            errorSpan.style.display = 'none';
+            document.getElementById('btnSubmit').style.display = 'inline';
+        }
+    }
+
+    // This function is used to clear the value and set focus to the input when the page is loaded / reloaded
+    function fixInput(){
+        var input = document.getElementById('hours')
+        input.value = ""
+        input.focus()
+    }
+
+    // This is to call our function on load. 
+    document.addEventListener('DOMContentLoaded', function () {
+        fixInput(); // Call fixInput when the document is loaded and parsed
+    });
+</script>
